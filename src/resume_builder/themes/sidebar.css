@@ -1,0 +1,38 @@
+:root {
+  --color-accent: #1e3a5f;
+  --color-accent-2: #2f7d6d;
+  --side-bg: #eef3f7;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 32%;
+  column-gap: 1.1rem;
+}
+
+.layout__side {
+  background: var(--side-bg);
+  padding: 0.7rem 0.75rem;
+  border-radius: 3pt;
+}
+
+.layout__side .section__title {
+  font-size: 1.05rem;
+}
+
+.layout__side .skills__row {
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.layout__side .skills dt {
+  color: var(--color-accent-2);
+}
+
+.layout__side .entry__header {
+  display: block;
+}
+
+.layout__side .entry__period {
+  display: block;
+}

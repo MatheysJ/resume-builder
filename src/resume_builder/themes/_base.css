@@ -1,0 +1,172 @@
+/* Size everything in em/rem: page fitting only changes --font-size. */
+:root {
+  --font-size: 10.5pt;
+  --font-body: "Carlito", "Calibri", "Liberation Sans", "DejaVu Sans", sans-serif;
+  --font-heading: var(--font-body);
+  --color-text: #1f2328;
+  --color-muted: #57606a;
+  --color-accent: #0b3d6b;
+  --color-accent-2: #0f766e;
+  --color-rule: var(--color-accent-2);
+  --gap: 0.9rem;
+}
+
+/* @page ignores CSS variables, so themes override this rule to change margins. */
+@page {
+  size: A4;
+  margin: 14mm 16mm;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  line-height: 1.32;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+strong {
+  font-weight: 700;
+}
+
+.summary a,
+.entry__text a,
+.entry__bullets a,
+.list a,
+.skills a,
+.section__text a {
+  color: var(--color-accent-2);
+}
+
+.header {
+  margin-bottom: var(--gap);
+}
+
+.header__name {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  line-height: 1.05;
+  color: var(--color-accent);
+}
+
+.header__headline {
+  margin-top: 0.15rem;
+  font-size: 1.15rem;
+  color: var(--color-accent-2);
+}
+
+.header__contact {
+  margin-top: 0.35rem;
+  color: var(--color-muted);
+}
+
+.header__contact a {
+  color: var(--color-text);
+}
+
+.summary {
+  margin-bottom: var(--gap);
+}
+
+.section {
+  margin-bottom: var(--gap);
+}
+
+.section__title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-bottom: 0.15rem;
+  border-bottom: 1.2pt solid var(--color-rule);
+  margin-bottom: 0.45rem;
+  break-after: avoid;
+}
+
+.entry {
+  margin-bottom: 0.55rem;
+  break-inside: avoid;
+}
+
+.entry__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.entry__title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.entry__org {
+  font-weight: 400;
+  color: var(--color-accent-2);
+}
+
+.entry__period,
+.entry__location {
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.entry__text {
+  margin-top: 0.15rem;
+}
+
+.entry__bullets,
+.list {
+  margin-top: 0.2rem;
+  padding-left: 1.1rem;
+}
+
+.entry__bullets li,
+.list li {
+  margin-bottom: 0.12rem;
+}
+
+.entry__bullets li::marker,
+.list li::marker {
+  color: var(--color-accent-2);
+}
+
+.skills__row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+
+.skills dt {
+  flex: 0 0 9.5rem;
+  font-weight: 700;
+}
+
+.skills dd {
+  flex: 1;
+}
+
+.credit {
+  margin-top: 0.6rem;
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  text-align: right;
+}
+
+.credit a {
+  color: var(--color-accent-2);
+}

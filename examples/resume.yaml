@@ -1,0 +1,94 @@
+# Currículo de exemplo (pessoa fictícia). Copie para resumes/<nome>.yaml,
+# que fica fora do Git, e edite.
+#
+# Textos aceitam **negrito** e [links](https://exemplo.com).
+# Seções com `column: side` vão para a barra lateral no tema `sidebar` e para o
+# fim da página nos temas de uma coluna.
+
+meta:
+  title: Currículo · Ana Souza
+  author: Ana Souza
+  subject: Engenheira de Software Back-end
+  keywords: [Java, Spring Boot, AWS, microsserviços]
+  lang: pt-BR
+
+basics:
+  name: Ana Souza
+  headline: Engenheira de Software Back-end · Java e AWS
+  location: São Paulo, SP
+  email: ana.souza@example.com
+  phone: +55 11 90000-0000
+  links:
+    - label: linkedin.com/in/ana-souza-exemplo
+      url: https://www.linkedin.com/in/ana-souza-exemplo
+    - label: github.com/ana-souza-exemplo
+      url: https://github.com/ana-souza-exemplo
+
+summary: >
+  Engenheira de software com 6 anos em sistemas de pagamento. Back-end em
+  **Java e Spring Boot**, microsserviços na AWS e mensageria orientada a
+  eventos. Referência técnica do time em integrações e observabilidade.
+
+sections:
+  - title: Experiência
+    kind: entries
+    items:
+      - title: Engenheira de Software Sênior
+        org: Pagamentos Exemplo S.A.
+        period: jan 2023 – atual
+        location: Remoto
+        bullets:
+          - Desenhei a migração da liquidação diária de um monólito para três microsserviços em EKS, sem janela de indisponibilidade.
+          - Reduzi o tempo de conciliação de **4 h para 35 min** com processamento em lotes paralelos e filas SQS.
+          - Defini o padrão de logs estruturados e rastreamento distribuído adotado por cinco squads.
+          - Conduzo revisões de código e mentoria de duas pessoas desenvolvedoras júnior.
+      - title: Engenheira de Software
+        org: Varejo Digital Ltda.
+        period: mar 2020 – dez 2022
+        location: São Paulo, SP
+        bullets:
+          - Back-end do checkout em Spring Boot, com antifraude síncrono e estorno assíncrono via RabbitMQ.
+          - Testes de contrato entre serviços, que derrubaram em 60% os incidentes de integração.
+      - title: Desenvolvedora (estágio)
+        org: Software House Exemplo
+        period: fev 2019 – fev 2020
+        bullets:
+          - APIs REST em Java para aplicativos internos e automação de testes com JUnit.
+
+  - title: Projetos
+    kind: entries
+    items:
+      - title: conciliador
+        org: projeto pessoal
+        text: >
+          Conciliação de arquivos de pagamento em Java 21 e Spring Batch, com
+          testes de propriedades. Código em
+          [github.com/ana-souza-exemplo/conciliador](https://github.com/ana-souza-exemplo/conciliador).
+
+  - title: Competências
+    kind: skills
+    column: side
+    items:
+      - label: Back-end
+        value: Java, Spring Boot, Spring Batch, APIs REST
+      - label: Cloud
+        value: AWS (EKS, RDS, S3, SQS), Docker, Kubernetes
+      - label: Dados e mensageria
+        value: PostgreSQL, RabbitMQ, SQS
+      - label: Qualidade
+        value: JUnit, Testcontainers, observabilidade com OpenTelemetry
+
+  - title: Formação
+    kind: entries
+    column: side
+    items:
+      - title: Ciência da Computação
+        org: Universidade Exemplo
+        period: 2016 – 2020
+
+  - title: Idiomas e certificações
+    kind: list
+    column: side
+    items:
+      - Inglês avançado
+      - AWS Certified Developer – Associate

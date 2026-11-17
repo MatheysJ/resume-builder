@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="{{ resume.meta.lang }}">
+<head>
+  <meta charset="utf-8">
+  <title>{{ resume.meta.title }}</title>
+  <meta name="author" content="{{ resume.meta.author }}">
+  {% if resume.meta.subject %}<meta name="description" content="{{ resume.meta.subject }}">{% endif %}
+  {% if resume.meta.keywords %}<meta name="keywords" content="{{ resume.meta.keywords | join(', ') }}">{% endif %}
+  <style>{{ theme_css | safe }}</style>
+  <style>{{ size_css | safe }}</style>
+</head>
+<body>
+{% macro render_section(section) %}
+  <section class="section section--{{ section.kind }}">
+    <h2 class="section__title">{{ section.title }}</h2>
+
+    {% if section.kind == "entries" %}
+      {% for entry in section.entries %}
+      <article class="entry">
+        <header class="entry__header">
+          <h3 class="entry__title">
+            {{ entry.title | inline }}{% if entry.org %}<span class="entry__org"> · {{ entry.org | inline }}</span>{% endif %}
+          </h3>
+          {% if entry.period %}<span class="entry__period">{{ entry.period }}</span>{% endif %}
+        </header>
+        {% if entry.location %}<p class="entry__location">{{ entry.location }}</p>{% endif %}
+        {% if entry.text %}<p class="entry__text">{{ entry.text | inline }}</p>{% endif %}
+        {% if entry.bullets %}
+        <ul class="entry__bullets">
+          {% for bullet in entry.bullets %}<li>{{ bullet | inline }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+      </article>
+      {% endfor %}
+
+    {% elif section.kind == "skills" %}
+      <dl class="skills">
+        {% for skill in section.skills %}
+        <div class="skills__row">
+          <dt>{{ skill.label }}</dt>
+          <dd>{{ skill.value | inline }}</dd>
+        </div>
+        {% endfor %}
+      </dl>
+
+    {% elif section.kind == "list" %}
+      <ul class="list">
+        {% for item in section.items %}<li>{{ item | inline }}</li>{% endfor %}
+      </ul>
+
+    {% else %}
+      <p class="section__text">{{ section.text | inline }}</p>
+    {% endif %}
+  </section>
+{% endmacro %}
+
+  <header class="header">
+    <h1 class="header__name">{{ resume.basics.name }}</h1>
+    {% if resume.basics.headline %}<p class="header__headline">{{ resume.basics.headline }}</p>{% endif %}
+    {% if contact %}
+    <p class="header__contact">
+      {% for item in contact %}{% if not loop.first %}<span class="header__sep"> · </span>{% endif %}{{ item }}{% endfor %}
+    </p>
+    {% endif %}
+  </header>
+
+  {% if resume.summary %}
+  <section class="summary">
+    <p>{{ resume.summary | inline }}</p>
+  </section>
+  {% endif %}
+
+  {# The main column must come first: it sets the reading order that ATS parsers follow. #}
+  <div class="layout">
+    <main class="layout__main">
+      {% for section in main %}{{ render_section(section) }}{% endfor %}
+    </main>
+    {% if side %}
+    <aside class="layout__side">
+      {% for section in side %}{{ render_section(section) }}{% endfor %}
+    </aside>
+    {% endif %}
+  </div>
+
+  {% if resume.credit %}
+  <footer class="credit">
+    {{ credit.text }}
+    <a href="{{ credit.url }}">{{ credit.handle }}</a>
+  </footer>
+  {% endif %}
+</body>
+</html>

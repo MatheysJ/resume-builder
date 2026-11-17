@@ -1,0 +1,10 @@
+# Real resumes hold personal data and must never be committed.
+resumes/
+out/
+
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+build/
+dist/
