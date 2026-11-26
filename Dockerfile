@@ -13,7 +13,7 @@ RUN apt-get update \
 WORKDIR /app
 COPY pyproject.toml README.md ./
 COPY src ./src
-RUN pip install --no-cache-dir ".[dev]"
+RUN pip install --no-cache-dir ".[dev,jobhunt]"
 
 WORKDIR /work
 ENTRYPOINT ["resume-builder"]

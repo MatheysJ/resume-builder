@@ -12,6 +12,11 @@ services:
   resume:
     <<: *common
 
+  jobhunt:
+    <<: *common
+    entrypoint: ["jobhunt"]
+    command: ["--help"]
+
   test:
     <<: *common
     entrypoint: ["pytest", "-q", "-p", "no:cacheprovider"]
