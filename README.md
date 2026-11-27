@@ -2,6 +2,8 @@
 
 Gera currículos em PDF a partir de **YAML**, com o visual definido em **CSS**. O HTML é montado com Jinja e convertido em PDF pelo [WeasyPrint](https://weasyprint.org/).
 
+O repositório também traz o [**jobhunt**](#jobhunt-busca-de-vagas-e-candidaturas-em-construção), em construção: busca vagas e prepara candidaturas a partir de um currículo mestre.
+
 ```bash
 docker compose run --rm resume build examples/resume.yaml --theme sidebar --preview
 # out/resume.pdf · 1 página · fonte 10.9 pt
@@ -36,9 +38,10 @@ Requer Python 3.11+ e as [dependências de sistema do WeasyPrint](https://doc.co
 
 ```bash
 python -m venv .venv
-.venv/bin/pip install -e ".[dev]"     # Windows: .venv\Scripts\pip
+.venv/bin/pip install -e ".[dev,jobhunt]"     # Windows: .venv\Scripts\pip
 resume-builder build examples/resume.yaml
 pytest
+ruff check .
 ```
 
 Sem o Pango, os testes de PDF são pulados e o restante (modelo, HTML, ajuste de página) roda normalmente.
@@ -97,6 +100,25 @@ Erros apontam o campo exato: `erro: sections[0].items[2].title: campo obrigatór
 
 Todo tema é aplicado sobre [`_base.css`](src/resume_builder/themes/_base.css), que define a estrutura e as variáveis (`--color-accent`, `--font-body`, `--gap`…). Um tema novo costuma ser só um bloco `:root` com outras cores e fontes. Meça tudo em `em`/`rem`: o ajuste de página muda apenas `--font-size`.
 
+## jobhunt: busca de vagas e candidaturas (em construção)
+
+O `jobhunt` parte de um **currículo mestre**, um YAML deste projeto com todas as suas experiências, para buscar vagas no LinkedIn, Indeed, Glassdoor e Gupy, avaliar a compatibilidade e gerar um currículo sob medida para cada candidatura. O envio fica com você. A especificação e o roteiro estão em [`docs/automacao-candidaturas.md`](docs/automacao-candidaturas.md).
+
+Por enquanto, ele cria e valida o perfil:
+
+```bash
+pip install -e ".[jobhunt]"
+jobhunt init       # cria data/profile.yaml e data/jobhunt.db; data/ fica fora do Git
+cp resumes/meu-curriculo-completo.yaml data/master.yaml
+jobhunt check
+# perfil ok · 2 termos de busca · sites: linkedin, indeed, glassdoor, gupy · 3 competências · 2 respostas salvas
+# currículo mestre ok · data/master.yaml · 5 seções · 5 itens · 7 bullets
+```
+
+Com Docker: `docker compose run --rm jobhunt init` e `docker compose run --rm jobhunt check`.
+
+O perfil guarda termos de busca, filtros, anos por competência e respostas para formulários. O modelo comentado está em [`src/jobhunt/templates/profile.yaml`](src/jobhunt/templates/profile.yaml). Erros apontam o campo, como no currículo: `search.sites[1]: use 'linkedin', 'indeed', 'glassdoor' ou 'gupy'`.
+
 ## Estrutura
 
 ```
@@ -112,4 +134,11 @@ src/resume_builder/
 ├── cli.py
 ├── templates/resume.html.j2
 └── themes/       # _base.css, classic.css, minimal.css, sidebar.css
+
+src/jobhunt/
+├── profile.py    # perfil: busca, filtros, competências e respostas (pydantic)
+├── db.py         # SQLite com migrações
+├── text.py       # normalização para comparar títulos, empresas e perguntas
+├── cli.py
+└── templates/profile.yaml
 ```

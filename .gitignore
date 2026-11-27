@@ -1,6 +1,8 @@
-# Real resumes hold personal data and must never be committed.
+# Real resumes and jobhunt data (profile, database, browser session) hold
+# personal data and must never be committed.
 resumes/
 out/
+data/
 
 .venv/
 __pycache__/

@@ -22,7 +22,8 @@ def test_html_has_content_metadata_and_font_size(example):
 def test_main_column_comes_before_the_sidebar(example):
     html = render_html(example, load_theme("sidebar"), 10)
 
-    assert html.index("Experiência") < html.index('<aside class="layout__side">') < html.index("Competências")
+    sidebar = html.index('<aside class="layout__side">')
+    assert html.index("Experiência") < sidebar < html.index("Competências")
 
 
 def test_contact_line_links_and_escapes():

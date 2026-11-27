@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import io
 from dataclasses import dataclass
-from functools import lru_cache
+from functools import cache
 from pathlib import Path
 
 from pypdf import PdfReader, PdfWriter
@@ -32,7 +32,7 @@ def build_pdf(resume: Resume, options: BuildOptions) -> BuildResult:
     # Lazy import: WeasyPrint fails to load without Pango, and the rest of the package must not.
     from weasyprint import HTML
 
-    @lru_cache(maxsize=None)
+    @cache
     def render(font_size: float):
         html = render_html(resume, options.theme_css, font_size)
         return HTML(string=html).render()

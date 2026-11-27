@@ -1,0 +1,41 @@
+# Perfil do jobhunt. `jobhunt init` copia este arquivo para data/profile.yaml,
+# que fica fora do Git. Depois de editar, valide com `jobhunt check`.
+
+# Currículo mestre: um YAML do resume-builder com TODAS as suas experiências,
+# projetos e bullets. Cada candidatura usa um recorte dele, sem inventar nada.
+# O caminho é relativo a este arquivo.
+resume: master.yaml
+
+search:
+  terms:                          # cada termo vira uma busca em cada site
+    - desenvolvedor back-end java
+    - engenheiro de software
+  location: São Paulo, SP
+  sites: [linkedin, indeed, glassdoor, gupy]
+  remote_only: false
+  hours_old: 72                   # só vagas publicadas nas últimas N horas
+  results_per_term: 30            # por site; volume baixo evita bloqueio
+
+filters:                          # regras aplicadas antes de gastar tokens
+  seniority: [mid, senior]        # intern, junior, mid (pleno), senior, staff, lead; vazio = todas
+  work_model: [remote, hybrid]    # remote, hybrid, onsite; vazio = todos
+  min_salary: 12000               # CLT, mensal, bruto; vagas sem salário passam
+  pj_factor: 1.4                  # PJ equivalente = CLT × fator
+  exclude_companies: []
+  exclude_terms: [estágio, php]   # sem diferenciar maiúsculas nem acentos
+
+skills:                           # responde "quantos anos de experiência com X?"
+  - name: Java
+    years: 6
+    aliases: [Java 17, Java 21, JVM]
+  - name: Spring Boot
+    years: 5
+  - name: AWS
+    years: 4
+    aliases: [EKS, SQS, S3]
+
+answers:                          # respostas reutilizáveis em formulários
+  - question: Qual a sua pretensão salarial?
+    answer: "14000"
+  - question: Qual a sua disponibilidade para início?
+    answer: 30 dias
